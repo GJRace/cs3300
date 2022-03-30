@@ -58,6 +58,13 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
+  RSpec.feature "Visiting the homepage", type: :feature do
+    scenario "The visitor should see projects" do
+      visit root_path
+      expect(page).to have_text("Title Description")
+    end
+  end
+
   RSpec.feature "Projects", type: :feature do
     context "Create new project" do
       before(:each) do
@@ -99,6 +106,22 @@ RSpec.describe ProjectsController, type: :controller do
         end
         click_button "Update Project"
         expect(page).to have_content("Description can't be blank")
+      end
+
+      scenario "should be successful" do
+        within("form") do
+          fill_in "Title", with: "New title"
+        end
+        click_button "Update Project"
+        expect(page).to have_content("Project was successfully updated")
+      end
+  
+      scenario "should fail" do
+        within("form") do
+          fill_in "Title", with: ""
+        end
+        click_button "Update Project"
+        expect(page).to have_content("Title can't be blank")
       end
     end
   
