@@ -24,6 +24,9 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
+require 'devise'
+require_relative 'Support/controller_macros'
+
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -60,6 +63,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::IntegrationHelpers, :type => :feature
+  config.include FactoryBot::Syntax::Methods
+  config.include ControllerMacros
+  config.extend ControllerMacros, :type => :controller
+
 end
 
 require 'simplecov'
@@ -67,5 +77,10 @@ SimpleCov.start 'rails' do
   add_filter '/bin/'
   add_filter '/db/'
   add_filter '/spec/' # for rspec
+  add_filter 'channel.rb'
+  add_filter 'connection.rb'
   add_filter '/app/mailers/'
 end
+
+
+require 'devise'
