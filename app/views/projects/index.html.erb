@@ -1,29 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div{
+  overflow: hidden
+}
+</style>
+</head>
+
+<body>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
+<div class="text-center">
+  <p class="lead">This is my Portflio for the CS3300 project.</p>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<main role="main">
+      
+      <div class="album py-1 bg-light">
+        <div class="container">
+        <div class="text-center">
+          <h1 class="display-4">Projects</h1>
+        </div>
+          <div class="row">
+          <% @projects.each do |project| %>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                <div class="test" style="height:40px">
+                  <h3 class="card-text"<td><%= project.title %></td></h3>
+                  </div>
+                  <div class="test" style="height:145px"">
+                  <p class="card-text"><td><%= project.description %></td></p>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <%= link_to 'Show', project %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+    </main>
+    </body>
+    </html>

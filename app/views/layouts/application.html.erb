@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+  
+
   <head>
     <title>Cs3300</title>
     <%= csrf_meta_tags %>
@@ -7,11 +9,29 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">My Portflio</a>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+        <span class="navbar-toggle-icon"></span>
+      </button> 
+      <ul class="navbar-nav ml-auto">
+      <% if !current_user %>
+        <li class="nav-item">
+         <a class="btn btn-outline-light nav-link" href="/users/sign_in">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-light nav-link" href="/users/sign_up">Sign Up</a>
+        </li>
+      <% else %>
+        <li class="nav-item">
+        <a class="btn btn-outline-light nav-link" href="/projects/new">New Project</a>
+        </li>  
+        <li class="nav-item">
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete,class:'btn btn-outline-light nav-link' %>
+        </li>
+      <% end %>
+        </ul>
+    </nav>
+  </head>
+  <%= yield %>
 </html>
